@@ -1,0 +1,85 @@
+{% include 'hospitals_header.html' %}
+<center>
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex flex-column justify-content-center">
+	<div class="container" data-aos="zoom-in" data-aos-delay="100">
+	  <!-- <h1></h1> -->
+	  <p><span  data-typed-items="Manage Schedule" style="font-family:bold;color:white;font-size:50px">Manage Schedule</span></p>
+
+	
+
+<form method="post">
+
+	{% if data['up'] %}
+	<table  class="table" style="width: 1000px; background-color: rgba(0, 0, 0, 0.7);color:white"  >
+		<tr>
+			<th>From Time</th>
+			<td><input type="time" name="ft" required="" class="form-control" style="background-color: #00000080 ; color: #fff" value={{data['up'][0]['ftime']}}></td>
+			
+		</tr>
+		<tr>
+			<th>To Time</th>
+			<td><input type="time" name="tt" required="" class="form-control" style="background-color: #00000080 ; color: #fff" value={{data['up'][0]['ttime']}}></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" class="btn btn-primary" value="ADD"></td>
+
+		</tr>
+	</table>
+
+	{% else %}
+				<table  class="table" style="width: 1000px; background-color: rgba(0, 0, 0, 0.7);color:white" >
+					<tr>
+						<th>From Time</th>
+						<td><input type="time" required="" name="ft" class="form-control" ></td>
+						
+					</tr>
+					<tr>
+						<th>To Time</th>
+						<td><input type="time" required="" name="tt" class="form-control" ></td>
+					</tr>
+					
+					<tr>
+						<td colspan="2" align="center"><input type="submit" name="submit" class="btn btn-primary" value="ADD"></td>
+
+					</tr>
+				</table>
+			
+				{% endif %}
+</form>
+
+
+
+
+	
+</div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+<h1>VIEW SCHEDULES</h1>
+
+<table class="table" style="width: 500px;  ">
+		<tr>
+			<th>Slno</th>
+			<th>From Time</th>
+			<th>To Time</th>
+			
+		</tr>
+		{% for row in data['shedule'] %}
+		<tr>
+			<td>{{ loop.index}}</td>
+			<td>{{ row['ftime'] }}</td>
+			<td>{{ row['ttime'] }}</td>
+			<td><a href="?action=update&shid={{row['scheduling_id']}}&did={{data['did']}}" class="btn btn-warning">UPDATE</a></td>
+			<td><a href="?action=delete&shid={{row['scheduling_id']}}&did={{data['did']}}" class="btn btn-warning">DELETE</a></td>
+		</tr>
+		{% endfor %}
+	</td>
+</tr>
+</table>
+
+
+</center>
+{% include 'footer.html' %}
